@@ -2,17 +2,32 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+
+
 
 function SignUpPage() {
+  const router = useRouter();
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
   });
 
-  const signupUser =  (e:any) => {
+  const signupUser =  async (e:any) => {
     e.preventDefault();
     console.log(user);
+
+    try {
+      const response = await axios.post("/api/users/signup",user);
+      console.log("Response Data",response.data);
+      alert("SignUp Sucessfull");
+      router.push("/login");
+    } catch (error:any) {
+      alert("Signup Failed");
+      console.log(error.message);
+    }
   };
 
   return (
@@ -33,7 +48,7 @@ function SignUpPage() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={signupUser} className="space-y-6">
             <div>
               <label htmlFor="username" className="block text-sm/6 font-medium">
                 Username
@@ -105,7 +120,7 @@ function SignUpPage() {
 
             <div>
               <button
-                onClick={signupUser}
+                // onClick={signupUser}
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
