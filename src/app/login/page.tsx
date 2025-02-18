@@ -1,17 +1,29 @@
 "use client";
 
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 function LoginPage() {
+  const router = useRouter();
   const [user, setUser] = useState({
       email: "",
       password: "",
     });
 
-    const handleLogin = (e:any) =>{
+    const handleLogin = async (e:any) =>{
       e.preventDefault();
       console.log(user);
+
+      try {
+        const response = await axios.post("/api/users/login",user);
+        alert("Login Successful");
+        router.push("/allblogs");
+      } catch (error:any) {
+        console.log(error.message);
+        alert("Login Failed");
+      }
     }
   return (
     <>
