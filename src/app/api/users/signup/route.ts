@@ -8,7 +8,7 @@ connectToDatabase();
 export async function POST(request:NextRequest) {
     try {
         const reqBody = await request.json();
-        console.log(reqBody)
+        // console.log(reqBody)
         const{username,email,password} = reqBody;
 
         const User = await user.findOne({email});

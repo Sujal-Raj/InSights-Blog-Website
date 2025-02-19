@@ -18,8 +18,9 @@ function LoginPage() {
 
       try {
         const response = await axios.post("/api/users/login",user);
+        localStorage.setItem("username",response.data.username);
         alert("Login Successful");
-        router.push("/allblogs");
+        router.push("/main");
       } catch (error:any) {
         console.log(error.message);
         alert("Login Failed");

@@ -37,6 +37,7 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({
         message:"Login Successfull",
         success:true,
+        username:tokenData.username,
     })
 
     response.cookies.set("token",token,{
@@ -46,7 +47,7 @@ export async function POST(request: NextRequest) {
     return response;
     
   } catch (error: any) {
-    alert("SignUp Failed");
+    // alert("SignUp Failed");
     console.log(error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
