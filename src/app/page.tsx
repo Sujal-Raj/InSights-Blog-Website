@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import { MacbookScroll } from "@/app/components/ui/macbook-scroll";
 import Link from "next/link";
 import Footer from "./components/Footer";
+import FeaturesSection from "./components/FeaturesSection";
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -49,6 +50,7 @@ export default function Home() {
           showGradient={false}
         />
       </section>
+      <FeaturesSection/>
       <Footer/>
     </main>
   );
