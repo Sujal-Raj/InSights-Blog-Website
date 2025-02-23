@@ -1,40 +1,21 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import NavbarAfterLogin from "../components/NavbarAfterLogin";
 import Link from "next/link";
+import CreateBlogPage from "../create-a-blog/page";
 
 function MainPage() {
+  const [activeSession, setActiveSession] = useState("all-blogs")
   const username = localStorage.getItem("username");
   return (
     <>
-      <nav className="min-h-[10vh] flex justify-between items-center px-10">
-        <h1 className="text-2xl/7 font-bold text-white sm:truncate sm:text-3xl sm:tracking-tight capitalize">
-          Welcome,{username}
-        </h1>
-        <div className="flex items-center gap-4">
-          <ul className="flex items-center gap-4">
-            <li className="">
-              <Link href={""}>All Blogs</Link>
-            </li>
-            <li>
-              <Link href={"/create-a-blog"}>Create a Blog</Link>
-              
-            </li>
-            <li>
-              <Link href={""}>My Blogs</Link>
-              
-            </li>
-            <li>
-              <Link href={""}>Profile</Link>
-              
-            </li>
-          </ul>
-          <button className="shadow-[0_0_0_3px_#000000_inset] px-6 py-2 bg-transparent border border-black dark:border-white dark:text-white text-black rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
-            Log Out
-          </button>
-        </div>
-      </nav>
-      {/* <NavbarAfterLogin/> */}
+    <div className="min-h-[10vh]">
+      <NavbarAfterLogin setActiveSession={setActiveSession}/>
+    </div>
+      <section className=" max-h-[90vh] p-10 overflow-y-auto scrollbar-hide">
+        {activeSession === "create-a-blog" && <CreateBlogPage/>}
+      </section>
+
     </>
   );
 }

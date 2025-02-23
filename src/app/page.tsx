@@ -7,6 +7,7 @@ import { MacbookScroll } from "@/app/components/ui/macbook-scroll";
 import Link from "next/link";
 import Footer from "./components/Footer";
 import FeaturesSection from "./components/FeaturesSection";
+import { AnimatedTestimonialsDemo } from "@/app/components/Testimonials";
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -51,6 +52,12 @@ export default function Home() {
         />
       </section>
       <FeaturesSection/>
+      <section>
+        <h2 className="text-3xl md:text-5xl lg:text-6xl text-white font-bold tracking-tight text-center">
+          Testimonials
+        </h2>
+      <AnimatedTestimonialsDemo/>
+      </section>
       <Footer/>
     </main>
   );
