@@ -44,6 +44,13 @@ function CreateBlogPage() {
 
     // console.log(formData);
 
+    const clearFormData =()=>{
+      setTitle("");
+      setCategory("");
+      setContent("");
+      setImage(null);
+    }
+
     try {
       const response = await axios.post("/api/blog/create", formData, {
         // headers: { "Content-Type": "multipart/form-data" },
@@ -56,6 +63,8 @@ function CreateBlogPage() {
     }finally {
       setLoading(false);
     }
+
+    clearFormData();
   };
 
   return (

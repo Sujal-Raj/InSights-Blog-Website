@@ -30,6 +30,7 @@ function MyBlogs() {
       const response = await axios.get(`/api/blog/get/${username}`);
       setBlogs(response.data.blogs);
       setLoading(false);
+      console.log(blogs);
     } catch (err) {
       setError("Failed to fetch blogs");
       setLoading(false);
@@ -84,7 +85,7 @@ function MyBlogs() {
         <h2 className="text-4xl font-semibold">My Blogs</h2>
         <p className="text-gray-400 underline">Catch your blogs here!</p>
       </div>
-
+{/* 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogs.map((blog) => (
           <div
@@ -96,7 +97,7 @@ function MyBlogs() {
                 src={blog.imageUrl}
                 alt={blog.title}
                 fill
-                sizes="auto"
+                // sizes="auto"
                 className="object-cover"
               />
             </div>
@@ -149,6 +150,73 @@ function MyBlogs() {
                 </div>
               </div>
             </div>
+          </div>
+        ))}
+      </div> */}
+
+
+      <div>
+        {blogs.map((blog) => (
+          <div key={blog._id}  className="px-10 ">
+            <div className="flex flex-col md:flex-row gap-5 mb-6 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 !text-white border-b-2">
+            <div className="w-[40%]">
+              <img
+                src={blog.imageUrl}
+                alt={blog.title}
+                // width={400}
+                // height={00}
+                className="cover h-full w-full"
+              />
+            </div>
+            <div className="p-6 w-[50%]">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm text-gray-500 font-medium underline">
+                  {blog.category}
+                </span>
+                <span className="text-sm text-gray-500">
+                  {new Date(blog.createdAt).toLocaleDateString()}
+                </span>
+              </div>
+
+              <h3 className="text-2xl text-white font-semibold mb-2 truncate">
+                {blog.title}
+              </h3>
+
+              <div className="text-white mb-4 line-clamp-4 min-h-[14vh]">
+                {blog.content.replace(/<[^>]*>/g, "")}
+              </div>
+
+              <div className="flex justify-between items-center gap-4">
+                <button
+                  onClick={() => (window.location.href = `/blog/${blog._id}`)}
+                  className="flex items-center text-indigo-400 hover:text-indigo-800"
+                >
+                  <IconEye className="w-4 h-4 mr-1" />
+                  View
+                </button>
+
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() =>
+                      (window.location.href = `/blog/edit/${blog._id}`)
+                    }
+                    className="flex items-center text-blue-400 hover:text-blue-800"
+                  >
+                    <IconPencil className="w-4 h-4 mr-1" />
+                    Edit
+                  </button>
+
+                  <button
+                    onClick={() => handleDelete(blog._id)}
+                    className="flex items-center text-red-500 hover:text-red-800"
+                  >
+                    <IconTrash className="w-4 h-4 mr-1" />
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           </div>
         ))}
       </div>
