@@ -13,11 +13,16 @@ const blogSchema = new mongoose.Schema({
         type:String,
         trim:true
     },
+    imageUrl:{
+        type:String,
+        required:true,
+        // default:'default.jpg'
+    },
     content:{
         type:String,
         require:true,
     }  
-})
+},{timestamps:true});
 
 const Blog = mongoose.models.blogs||mongoose.model("blogs",blogSchema)
 

@@ -11,10 +11,13 @@ import {
 } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
 
 
-function NavbarAfterLogin({setActiveSession}) {
+
+function NavbarAfterLogin() {
+  const router = useRouter();
   const username = localStorage.getItem("username");
 
     const links = [
@@ -75,7 +78,22 @@ function NavbarAfterLogin({setActiveSession}) {
           href: "#",
         },
       ];
+
+
+      const handleLogout = () => {
+        localStorage.clear();
+        router.push("/");
+        // setActiveSession("");
+        // Clear any cookies set by the app
+        document.cookie = "yourCookieName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      }
+
+      // const handleNavigation = (path, sessionType) => {
+      //   setActiveSession(sessionType);
+      //   router.push(path);
+      // }
   return (
+
    <>
     {/* <nav className='mt-4 flex '>
          <FloatingDock
@@ -89,26 +107,25 @@ function NavbarAfterLogin({setActiveSession}) {
         </h1>
         <div className="flex items-center gap-4">
           <ul className="flex items-center gap-4">
-            <li onClick={()=>setActiveSession("all-blogs")}>
-              <Link href={""}>All Blogs</Link>
+            <li>
+              <Link href={"/main"}>All Blogs</Link>
             </li>
-            <li onClick={()=>{
-              console.log("run")
-              setActiveSession("create-a-blog")
-            }}>
-              <Link href={""}>Create a Blog</Link>
+            <li>
+              <Link href={"/create-a-blog"}>Create a Blog</Link>
               
             </li>
             <li>
-              <Link href={""}>My Blogs</Link>
+              <Link href={"/my-blogs"}>My Blogs</Link>
               
             </li>
             <li>
-              <Link href={""}>Profile</Link>
+              <Link href={"/profile"}>Profile</Link>
               
             </li>
           </ul>
-          <button className="shadow-[0_0_0_3px_#000000_inset] px-6 py-2 bg-transparent border border-black dark:border-white dark:text-white text-black rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
+          <button 
+          onClick={handleLogout}
+          className="shadow-[0_0_0_3px_#000000_inset] px-6 py-2 bg-transparent border border-black dark:border-white dark:text-white text-black rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
             Log Out
           </button>
         </div>

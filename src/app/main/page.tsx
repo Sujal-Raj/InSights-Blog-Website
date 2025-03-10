@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import NavbarAfterLogin from "../components/NavbarAfterLogin";
 import Link from "next/link";
 import CreateBlogPage from "../create-a-blog/page";
+import MyBlogsPage from "../my-blogs/page";
 
 function MainPage() {
   const [activeSession, setActiveSession] = useState("all-blogs")
@@ -10,10 +11,10 @@ function MainPage() {
   return (
     <>
     <div className="min-h-[10vh]">
-      <NavbarAfterLogin setActiveSession={setActiveSession}/>
+      <NavbarAfterLogin/>
     </div>
       <section className=" max-h-[90vh] p-10 overflow-y-auto scrollbar-hide">
-        {activeSession === "create-a-blog" && <CreateBlogPage/>}
+        
       </section>
 
     </>
