@@ -68,6 +68,14 @@ function MainPage() {
     }
   };
 
+  if(loading == true){
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600"></div>
+      </div>
+    );
+  }
+
   if (blogs.length === 0) {
     return (
       <>
@@ -121,7 +129,7 @@ function MainPage() {
                 </span>
               </div>
               <Link
-                href={`/blog/${blog._id}`}
+                href={`/blogs/${blog._id}`}
                 className="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline"
               >
                 Read More

@@ -4,6 +4,7 @@ import axios from "axios";
 import { IconPencil, IconTrash, IconEye } from "@tabler/icons-react";
 import Image from "next/image";
 import NavbarAfterLogin from "../components/NavbarAfterLogin";
+import Link from "next/link";
 
 interface Blog {
   _id: string;
@@ -187,13 +188,20 @@ function MyBlogs() {
               </div>
 
               <div className="flex justify-between items-center gap-4">
-                <button
+                {/* <button
                   onClick={() => (window.location.href = `/blog/${blog._id}`)}
                   className="flex items-center text-indigo-400 hover:text-indigo-800"
                 >
                   <IconEye className="w-4 h-4 mr-1" />
                   View
-                </button>
+                </button> */}
+                <Link
+                                href={`/blogs/${blog._id}`}
+                                className="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline"
+                              >
+                                <IconEye className="w-4 h-4 mr-1" />
+                                View
+                              </Link>
 
                 <div className="flex space-x-2">
                   <button

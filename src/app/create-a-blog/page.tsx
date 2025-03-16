@@ -20,6 +20,7 @@ function CreateBlogPage() {
   const [content, setContent] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [editorKey, setEditorKey] = useState(0);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -67,6 +68,25 @@ function CreateBlogPage() {
     clearFormData();
   };
 
+  const getSummary = async () =>{
+    try {
+      const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${title}`)
+      const data = await response.json();
+      // console.log(data);
+      if (data.extract) {
+        setContent(data.extract);
+        setEditorKey((prevKey) => prevKey + 1); // Change key to force re-render
+      } else {
+        alert("No summary found for this title.");
+      }
+      // console.log(data.extract);
+      // setContent(data.extract);
+      // setEditorKey((prevKey) => prevKey + 1);
+    } catch (error:any) {
+      alert("Error getting summary");
+    }
+  }
+
   return (
     <>
     <div className="min-h-[10vh]">
@@ -77,7 +97,9 @@ function CreateBlogPage() {
         <p className="text-gray-400 underline">Start writing your blog now!</p>
       </div>
       <div className="w-1/2 mx-auto ">
-        <form onSubmit={handleSubmit}>
+        <form 
+        onSubmit={handleSubmit}
+        >
             <div>
               <label htmlFor="title" className="block font-medium">
                 Blog Title:
@@ -94,6 +116,15 @@ function CreateBlogPage() {
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
+            </div>
+            <div>
+            <button
+                onClick={getSummary}
+                className={` rounded-md bg-indigo-600 px-4 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${title == "" ? "hidden" : "block"}`}
+              >
+                {/* {!loading? "Get Summary" :"Publishing..."} */}
+                Get Summary
+              </button>
             </div>
             <div>
               <label htmlFor="category" className="block font-medium">
@@ -131,6 +162,7 @@ function CreateBlogPage() {
         <div>
             <p className="mb-1">Blog Content:</p>
             <QuillEditor
+            key={editorKey}
             value={content}
             onChange={(value: string) => setContent(value)}
             placeholder="Write your content here..."
@@ -138,7 +170,7 @@ function CreateBlogPage() {
         </div>
         <div>
               <button
-                type="submit"
+                // type="submit"
                 className=" rounded-md bg-indigo-600 px-4 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 {!loading? "Publish" :"Publishing..."}
