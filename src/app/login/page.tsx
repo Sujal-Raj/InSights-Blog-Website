@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 function LoginPage() {
+  const [loading,setLoading] = useState(false);
   const router = useRouter();
   const [user, setUser] = useState({
       email: "",
@@ -15,15 +16,18 @@ function LoginPage() {
     const handleLogin = async (e:any) =>{
       e.preventDefault();
       console.log(user);
+      setLoading(true);
 
       try {
         const response = await axios.post("/api/users/login",user);
         localStorage.setItem("username",response.data.username);
         alert("Login Successful");
+        setLoading(false);
         router.push("/main");
       } catch (error:any) {
         console.log(error.message);
         alert("Login Failed");
+        setLoading(false);
       }
     }
   return (
@@ -102,7 +106,7 @@ function LoginPage() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Login
+                {loading?"Logging in...":"Login"}
               </button>
             </div>
           </form>

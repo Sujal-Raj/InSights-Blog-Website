@@ -18,7 +18,7 @@ interface Blog {
 function OneBlog() {
   const { id } = useParams() as { id: string }; // Corrected parameter name
   const [blog, setBlog] = useState<Blog | null>(null);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function OneBlog() {
       const response = await axios.get(`/api/blog/find/${blogId}`);
       // console.log(response.data);
       setBlog(response.data);
-      // setLoading(false);
+      setLoading(false);
     } catch (error: any) {
       console.error("Error fetching blog:", error.message);
       setError("Failed to load blog.");
@@ -42,7 +42,15 @@ function OneBlog() {
     
   };
 
-  // if (loading) return <p className="text-center mt-10">Loading...</p>;
+  // if (loading){
+  //   return 
+  //     (
+  //       <div className="flex justify-center items-center min-h-screen">
+  //         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600"></div>
+  //       </div>
+  //     );  
+  // }
+
   if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
 
   return (

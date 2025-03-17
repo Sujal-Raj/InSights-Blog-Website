@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 
 
 function SignUpPage() {
+    const [loading,setLoading] = useState(false);
   const router = useRouter();
   const [user, setUser] = useState({
     username: "",
@@ -18,11 +19,13 @@ function SignUpPage() {
   const signupUser =  async (e:any) => {
     e.preventDefault();
     console.log(user);
+    setLoading(true);
 
     try {
       const response = await axios.post("/api/users/signup",user);
       console.log("Response Data",response.data);
       alert("SignUp Sucessfull");
+      setLoading(false);
       router.push("/login");
     } catch (error:any) {
       alert("Signup Failed");
@@ -124,7 +127,7 @@ function SignUpPage() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign up
+                {loading? "Signning in...": "Sign up"}
               </button>
             </div>
           </form>
