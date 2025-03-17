@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { FloatingDock } from "@/app/components/ui/floating-dock";
 import {
   IconBrandGithub,
@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation';
 
 
 function NavbarAfterLogin() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const username = localStorage.getItem("username");
 
@@ -81,11 +82,13 @@ function NavbarAfterLogin() {
 
 
       const handleLogout = () => {
+        setLoading(true);
         localStorage.clear();
         router.push("/");
         // setActiveSession("");
         // Clear any cookies set by the app
         document.cookie = "yourCookieName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        setLoading(false);
       }
 
       // const handleNavigation = (path, sessionType) => {
@@ -108,7 +111,7 @@ function NavbarAfterLogin() {
         <div className="flex items-center gap-4">
           <ul className="flex items-center gap-4">
             <li>
-              <Link href={"/main"}>All Blogs</Link>
+              <Link  href={"/main"}>All Blogs</Link>
             </li>
             <li>
               <Link href={"/create-a-blog"}>Create a Blog</Link>
@@ -126,7 +129,8 @@ function NavbarAfterLogin() {
           <button 
           onClick={handleLogout}
           className="shadow-[0_0_0_3px_#000000_inset] px-6 py-2 bg-transparent border border-black dark:border-white dark:text-white text-black rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
-            Log Out
+            {loading? "Logging out...": "Log out"}
+            {/* Log out */}
           </button>
         </div>
       </nav>
