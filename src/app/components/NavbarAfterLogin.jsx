@@ -121,10 +121,10 @@ function NavbarAfterLogin() {
               <Link href={"/my-blogs"}>My Blogs</Link>
               
             </li>
-            <li>
+            {/* <li>
               <Link href={"/profile"}>Profile</Link>
               
-            </li>
+            </li> */}
           </ul>
           <button 
           onClick={handleLogout}

@@ -21,10 +21,10 @@ function ProfilePage() {
               <td className="px-4 py-2 text-lg font-medium text-left border">Username:</td>
               <td className="px-4 py-2 text-lg font-normal text-left">{username}</td>
             </tr>
-            <tr>
+            {/* <tr>
               <td className="px-4 py-2 text-lg font-medium text-left border">Email:</td>
               <td className="px-4 py-2 text-lg font-normal text-left">johndoe@example.com</td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>

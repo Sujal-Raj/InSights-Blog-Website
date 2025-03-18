@@ -89,12 +89,52 @@ function BlogEditingPage() {
         setFile(selectedFile);
     };
 
+    // const handleSubmit = async (e: React.FormEvent) => {
+    //     e.preventDefault();
+    //     setIsSubmitting(true);
+    //     setError(null);
+    //     setSuccessMessage(null);
+
+    //     try {
+    //         // Create FormData object for file upload
+    //         const updateData = new FormData();
+    //         updateData.append("title", formData.title);
+    //         updateData.append("content", formData.content);
+    //         updateData.append("category", formData.category || "");
+            
+    //         // Only append file if a new one was selected
+    //         if (file) {
+    //             updateData.append("image", file);
+    //         } else {
+    //             // Keep existing image URL
+    //             updateData.append("imageUrl", formData.imageUrl);
+    //         }
+
+    //         // Send update request
+    //         const response = await axios.put(`/api/blog/update/${id}`, updateData, {
+    //             headers: {
+    //                 "Content-Type": "multipart/form-data"
+    //             }
+    //         });
+
+    //         setSuccessMessage("Blog updated successfully!");
+    //         setTimeout(() => {
+    //             router.push("/dashboard"); // Redirect to dashboard after success
+    //         }, 2000);
+    //     } catch (error: any) {
+    //         console.error("Error updating blog:", error.message);
+    //         setError(error.response?.data?.message || "Failed to update blog. Please try again.");
+    //     } finally {
+    //         setIsSubmitting(false);
+    //     }
+    // };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
         setError(null);
         setSuccessMessage(null);
-
+    
         try {
             // Create FormData object for file upload
             const updateData = new FormData();
@@ -109,21 +149,22 @@ function BlogEditingPage() {
                 // Keep existing image URL
                 updateData.append("imageUrl", formData.imageUrl);
             }
-
+    
             // Send update request
             const response = await axios.put(`/api/blog/update/${id}`, updateData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
             });
-
+    
             setSuccessMessage("Blog updated successfully!");
+            alert("Blog updated successfully!");
             setTimeout(() => {
-                router.push("/dashboard"); // Redirect to dashboard after success
-            }, 2000);
+                router.push("/my-blogs"); // Redirect to dashboard after success
+            }, 1000);
         } catch (error: any) {
             console.error("Error updating blog:", error.message);
-            setError(error.response?.data?.message || "Failed to update blog. Please try again.");
+            setError(error.response?.data?.error || "Failed to update blog. Please try again.");
         } finally {
             setIsSubmitting(false);
         }
