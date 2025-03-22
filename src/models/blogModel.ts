@@ -20,8 +20,13 @@ const blogSchema = new mongoose.Schema({
     },
     content:{
         type:String,
-        require:true,
-    }  
+        required:true,
+    },
+    // likes:{
+    //     type:Number,
+    //     default:0,
+    //     required:true,
+    // },
 },{timestamps:true});
 
 const Blog = mongoose.models.blogs||mongoose.model("blogs",blogSchema)

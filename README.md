@@ -1,11 +1,11 @@
-# Blog Website
+# InSights | Blog Website
 
 ## Overview
-The **Blog Website** is a dynamic platform that allows users to create, manage, and read blog posts. It provides a seamless user experience with an intuitive UI and responsive design. The platform is built using modern web technologies to ensure efficiency and scalability.
+The **InSights | Blog Website** is a dynamic platform that allows users to create, manage, and read blog posts. It provides a seamless user experience with an intuitive UI and responsive design. The platform is built using modern web technologies to ensure efficiency and scalability.
 
 ## Features
 - 📝 **Create, Edit, and Delete Blog Posts**
-- 🔍 **Search and Filter Blogs**
+<!-- - 🔍 **Search and Filter Blogs** -->
 - 📄 **Rich Text Editor for Blog Content**
 - 📱 **Fully Responsive Design**
 - 🗂 **Categories and Tags for Organization**
@@ -14,11 +14,12 @@ The **Blog Website** is a dynamic platform that allows users to create, manage, 
 - 🚀 **Optimized Performance for Fast Loading**
 
 ## Tech Stack
+- **FrameWork:** NEXT JS
 - **Frontend:** React, Tailwind CSS
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB / Firebase (based on implementation)
 - **Authentication:** Firebase Auth / JWT
-- **Deployment:** Vercel / Netlify (for frontend), Render / Heroku (for backend)
+<!-- - **Deployment:** Vercel / Netlify (for frontend), Render / Heroku (for backend) -->
 
 ## Installation & Setup
 ### Prerequisites
@@ -73,8 +74,8 @@ This project is licensed under the MIT License.
 ## Contact
 For any queries or suggestions, feel free to reach out:
 - **Email:** your-email@example.com
-- **LinkedIn:** [Your LinkedIn Profile](https://linkedin.com/in/your-profile)
-- **GitHub:** [Your GitHub](https://github.com/your-username)
+- **LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/sujalraj1/)
+- **GitHub:** [Your GitHub](https://github.com/Sujal-Raj/)
 
 
 
