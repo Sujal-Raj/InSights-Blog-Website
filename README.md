@@ -17,8 +17,8 @@ The **InSights | Blog Website** is a dynamic platform that allows users to creat
 - **FrameWork:** NEXT JS
 - **Frontend:** React, Tailwind CSS
 - **Backend:** Node.js, Express.js
-- **Database:** MongoDB / Firebase (based on implementation)
-- **Authentication:** Firebase Auth / JWT
+- **Database:** MongoDB 
+- **Authentication:** Auth / JWT
 <!-- - **Deployment:** Vercel / Netlify (for frontend), Render / Heroku (for backend) -->
 
 ## Installation & Setup
@@ -45,6 +45,9 @@ Ensure you have the following installed:
    ```sh
    MONGO_URI=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret
+   CLOUD_NAME=
+   API_KEY=
+   API_SECRET=
    ```
 
 4. **Run the Development Server:**
@@ -57,8 +60,10 @@ Ensure you have the following installed:
 
 ## Deployment
 To deploy the project:
+<!--
 - **Frontend:** Use Vercel or Netlify for easy deployment.
 - **Backend:** Deploy on Render, Heroku, or any cloud service supporting Node.js.
+-->
 
 ## Contributing
 Contributions are welcome! To contribute:
@@ -74,8 +79,8 @@ This project is licensed under the MIT License.
 ## Contact
 For any queries or suggestions, feel free to reach out:
 - **Email:** your-email@example.com
-- **LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/sujalraj1/)
-- **GitHub:** [Your GitHub](https://github.com/Sujal-Raj/)
+- **LinkedIn:** [ https://www.linkedin.com/in/sujalraj1/ ]
+- **GitHub:** [ https://github.com/Sujal-Raj/ ]
 
 
 
