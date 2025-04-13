@@ -21,6 +21,7 @@ function CreateBlogPage() {
   const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [editorKey, setEditorKey] = useState(0);
+  const [generatingSummary, setGeneratingSummary] = useState<boolean>(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -68,24 +69,44 @@ function CreateBlogPage() {
     clearFormData();
   };
 
-  const getSummary = async () =>{
+  // const getSummary = async () =>{
+  //   try {
+  //     const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${title}`)
+  //     const data = await response.json();
+  //     // console.log(data);
+  //     if (data.extract) {
+  //       setContent(data.extract);
+  //       setEditorKey((prevKey) => prevKey + 1); // Change key to force re-render
+  //     } else {
+  //       alert("No summary found for this title.");
+  //     }
+  //     // console.log(data.extract);
+  //     // setContent(data.extract);
+  //     // setEditorKey((prevKey) => prevKey + 1);
+  //   } catch (error:any) {
+  //     alert("Error getting summary");
+  //   }
+  // }
+
+
+  const getSummary = async () => {
     try {
-      const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${title}`)
-      const data = await response.json();
-      // console.log(data);
-      if (data.extract) {
-        setContent(data.extract);
-        setEditorKey((prevKey) => prevKey + 1); // Change key to force re-render
+      setGeneratingSummary(true); // Start generating summary
+      const response = await axios.post("/api/blog/getsummary", { title });
+      if (response.data.summary) {
+        setContent(response.data.summary);
+        setEditorKey((prevKey) => prevKey + 1); // re-render editor with new content
+        setGeneratingSummary(false); // Stop generating summary
       } else {
-        alert("No summary found for this title.");
+        alert("Could not generate summary.");
+        setGeneratingSummary(false); // Stop generating summary
       }
-      // console.log(data.extract);
-      // setContent(data.extract);
-      // setEditorKey((prevKey) => prevKey + 1);
-    } catch (error:any) {
-      alert("Error getting summary");
+    } catch (error) {
+      alert("Error generating summary.");
+      console.error(error);
     }
-  }
+  };
+  
 
   return (
     <>
@@ -123,7 +144,7 @@ function CreateBlogPage() {
                 className={` rounded-md bg-indigo-600 px-4 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${title == "" ? "hidden" : "block"}`}
               >
                 {/* {!loading? "Get Summary" :"Publishing..."} */}
-                Get Summary
+                {generatingSummary ? "Generating Summary..." : "Get Summary"}
               </button>
             </div>
             <div>

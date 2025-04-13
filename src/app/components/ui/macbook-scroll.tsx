@@ -25,6 +25,7 @@ import { IconCaretLeftFilled } from "@tabler/icons-react";
 import { IconCaretDownFilled } from "@tabler/icons-react";
 import Image from "next/image";
 import blogbanner from "../../../../public/BlogBanner.png"
+import blogbanner2 from "../../../../public/BlogBanner2.png"
 
 export const MacbookScroll = ({
   src,
@@ -170,7 +171,7 @@ export const Lid = ({
         <Image
         //   src={src as string}
         //   src={"https://media.voog.com/0000/0036/2183/photos/Design_and_layout5-2n_block.png"}
-          src={blogbanner}
+          src={blogbanner2}
           alt="aceternity logo"
           fill
           className="object-cover object-left-top absolute rounded-lg inset-0 h-full w-full"
