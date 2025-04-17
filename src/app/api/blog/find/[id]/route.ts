@@ -82,37 +82,39 @@
 // }
 
 
-import { NextResponse } from "next/server";
-import connectToDatabase from "@/dbConfig/dbConfig"; // Ensure correct path
-import Blog from "@/models/blogModel"; // Ensure correct path
-import mongoose from "mongoose";
+import { NextRequest, NextResponse } from "next/server";
+import connectToDatabase from "@/dbConfig/dbConfig";
+import User from "@/models/userModel"; // Adjust the model as needed
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { username: string } }
+) {
   try {
-    // console.log("Connecting to database...");
+    const { username } = params;  // Directly use params as an object
+
     await connectToDatabase();
-    // console.log("Database connected.");
 
-    // Validate MongoDB ObjectId
-    if (!mongoose.Types.ObjectId.isValid(params.id)) {
-      console.error("Invalid Blog ID format:", params.id);
-      return NextResponse.json({ error: "Invalid Blog ID" }, { status: 400 });
+    // Fetch user by username
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      console.warn("User not found:", username);
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // console.log("Fetching blog with ID:", params.id);
-    const blog = await Blog.findById(params.id);
-
-    if (!blog) {
-      console.warn("Blog not found:", params.id);
-      return NextResponse.json({ error: "Blog not found" }, { status: 404 });
-    }
-
-    // console.log("Blog found:", blog);
-    return NextResponse.json(blog);
-  } catch (error:unknown) {
-    console.error("Error fetching blog:", error);
-    const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
-    return NextResponse.json({ error: "Internal Server Error", details: errorMessage }, { status: 500 });
+    return NextResponse.json(user);
+  } catch (error: unknown) {
+    console.error("Error fetching user:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "An unknown error occurred";
+    return NextResponse.json(
+      { error: "Internal Server Error", details: errorMessage },
+      { status: 500 }
+    );
   }
 }
+
+
+
 
