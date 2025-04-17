@@ -89,10 +89,10 @@ import mongoose from "mongoose";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;  // Use params directly as an object
+    const { id } = await params;  // Await the promise to access the object
 
     await connectToDatabase();
 
