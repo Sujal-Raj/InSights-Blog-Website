@@ -84,28 +84,34 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import connectToDatabase from "@/dbConfig/dbConfig";
-import User from "@/models/userModel"; // Adjust the model as needed
+import Blog from "@/models/blogModel";
+import mongoose from "mongoose";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { username: string } }
+  { params }: { params: { id: string } }
 ) {
   try {
-    const { username } = params;  // Directly use params as an object
+    const { id } = params;  // Use params directly as an object
 
     await connectToDatabase();
 
-    // Fetch user by username
-    const user = await User.findOne({ username });
-
-    if (!user) {
-      console.warn("User not found:", username);
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    // Validate MongoDB ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      console.error("Invalid Blog ID format:", id);
+      return NextResponse.json({ error: "Invalid Blog ID" }, { status: 400 });
     }
 
-    return NextResponse.json(user);
+    const blog = await Blog.findById(id);
+
+    if (!blog) {
+      console.warn("Blog not found:", id);
+      return NextResponse.json({ error: "Blog not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(blog);
   } catch (error: unknown) {
-    console.error("Error fetching user:", error);
+    console.error("Error fetching blog:", error);
     const errorMessage =
       error instanceof Error ? error.message : "An unknown error occurred";
     return NextResponse.json(
@@ -114,6 +120,7 @@ export async function GET(
     );
   }
 }
+
 
 
 
