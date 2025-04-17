@@ -1,8 +1,18 @@
 import mongoose from "mongoose";
 
+let URI: string ;
+
+if(process.env.NODE_ENV === "production") {
+    URI = process.env.MONGO_ATLAS_URI!;
+}
+else {
+    URI = process.env.MONGO_URI!;
+}
+
+
 export default async function connectToDatabase() {
     try {
-        mongoose.connect(process.env.MONGO_URI!);
+        mongoose.connect(URI);
 
         mongoose.connection.on("connected", () => {
             console.log("Connected to database");

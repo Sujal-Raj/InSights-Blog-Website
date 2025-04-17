@@ -46,9 +46,13 @@ export async function POST(request: NextRequest) {
 
     return response;
     
-  } catch (error: any) {
+  } catch (error: unknown) {
     // alert("SignUp Failed");
-    console.log(error.message);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error instanceof Error) {
+        console.log(error.message);
+    } else {
+        console.log("An unknown error occurred");
+    }
+    return NextResponse.json({ error: error instanceof Error ? error.message : "An unknown error occurred" }, { status: 500 });
   }
 }

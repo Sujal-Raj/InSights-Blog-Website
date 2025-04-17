@@ -64,8 +64,8 @@ function BlogEditingPage() {
             }
             
             setLoading(false);
-        } catch (error: any) {
-            console.error("Error fetching blog:", error.message);
+        } catch (error: unknown) {
+            console.error("Error fetching blog:", error);
             setError("Failed to load blog.");
             setLoading(false);
         }
@@ -151,7 +151,7 @@ function BlogEditingPage() {
             }
     
             // Send update request
-            const response = await axios.put(`/api/blog/update/${id}`, updateData, {
+            await axios.put(`/api/blog/update/${id}`, updateData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
@@ -162,9 +162,13 @@ function BlogEditingPage() {
             setTimeout(() => {
                 router.push("/my-blogs"); // Redirect to dashboard after success
             }, 1000);
-        } catch (error: any) {
-            console.error("Error updating blog:", error.message);
-            setError(error.response?.data?.error || "Failed to update blog. Please try again.");
+        } catch (error: unknown) {
+            console.error("Error updating blog:", error);
+            if (axios.isAxiosError(error) && error.response?.data?.error) {
+                setError(error.response.data.error);
+            } else {
+                setError("Failed to update blog. Please try again.");
+            }
         } finally {
             setIsSubmitting(false);
         }

@@ -16,7 +16,7 @@ function SignUpPage() {
     password: "",
   });
 
-  const signupUser =  async (e:any) => {
+  const signupUser =  async (e: React.FormEvent) => {
     e.preventDefault();
     console.log(user);
     setLoading(true);
@@ -27,9 +27,13 @@ function SignUpPage() {
       alert("SignUp Sucessfull");
       setLoading(false);
       router.push("/login");
-    } catch (error:any) {
+    } catch (error:unknown) {
       alert("Signup Failed");
-      console.log(error.message);
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unknown error occurred");
+      }
     }
   };
 

@@ -54,7 +54,7 @@ function CreateBlogPage() {
     }
 
     try {
-      const response = await axios.post("/api/blog/create", formData, {
+      await axios.post("/api/blog/create", formData, {
         // headers: { "Content-Type": "multipart/form-data" },
         
       });

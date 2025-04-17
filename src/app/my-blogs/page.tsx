@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { IconPencil, IconTrash, IconEye } from "@tabler/icons-react";
-import Image from "next/image";
+// import Image from "next/image";
 import NavbarAfterLogin from "../components/NavbarAfterLogin";
 import Link from "next/link";
 
@@ -32,7 +32,12 @@ function MyBlogs() {
       setBlogs(response.data.blogs);
       setLoading(false);
       // console.log(blogs);
-    } catch (err) {
+    } catch (err:unknown) {
+      if (err instanceof Error) {
+        console.error("Error fetching blogs:", err.message);
+      } else {
+        console.error("Error fetching blogs:", err);
+      }
       setError("Failed to fetch blogs");
       setLoading(false);
     }
@@ -43,8 +48,13 @@ function MyBlogs() {
       try {
         await axios.delete(`/api/blog/delete/${blogId}`);
         setBlogs(blogs.filter((blog) => blog._id !== blogId));
-      } catch (err) {
+      } catch (err:unknown) {
         // setError("Failed to delete blog");
+        if (err instanceof Error) {
+          console.error("Error deleting blog:", err.message);
+        } else {
+          console.error("Error deleting blog:", err);
+        }
         alert("Failed to delete blog");
       }
     }
@@ -71,7 +81,7 @@ function MyBlogs() {
         <div className="flex items-center justify-center flex-col py-5 gap-2">
           <h2 className="text-4xl font-semibold">My Blogs</h2>
           <p className="text-gray-400 underline">
-            You haven't created any blogs yet!
+            You haven&apos;t created any blogs yet!
           </p>
         </div>
       </>

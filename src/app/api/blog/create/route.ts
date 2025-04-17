@@ -52,7 +52,8 @@ export async function POST(req: Request) {
     await newBlog.save();
 
     return NextResponse.json({ message: "Blog created successfully", blog: newBlog }, { status: 201 });
-  } catch (error) {
+  } catch (error: unknown) {
+    console.error("Error creating blog:", error);
     return NextResponse.json({ error: "Failed to create blog" }, { status: 500 });
   }
 }

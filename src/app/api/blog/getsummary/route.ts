@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ summary });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Gemini API error:", error);
     return NextResponse.json({ error: "Failed to generate summary" }, { status: 500 });
   }

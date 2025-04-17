@@ -15,7 +15,8 @@ export async function GET(
       .sort({ createdAt: -1 }); // Most recent first
     
     return NextResponse.json({ blogs }, { status: 200 });
-  } catch (error) {
+  } catch (error: unknown) {
+    console.error("Error fetching blogs:", error);
     return NextResponse.json(
       { error: "Failed to fetch blogs" },
       { status: 500 }

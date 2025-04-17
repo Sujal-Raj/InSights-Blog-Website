@@ -34,10 +34,14 @@ function OneBlog() {
       // console.log(response.data);
       setBlog(response.data);
       setLoading(false);
-    } catch (error: any) {
-      console.error("Error fetching blog:", error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error fetching blog:", error.message);
+      } else {
+        console.error("Error fetching blog:", error);
+      }
       setError("Failed to load blog.");
-      // setLoading(false);
+      
     }
     
   };

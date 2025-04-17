@@ -2,6 +2,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import type Quill from 'quill';
 
 interface QuillEditorProps {
   value: string;
@@ -11,7 +12,7 @@ interface QuillEditorProps {
 
 const QuillEditor: React.FC<QuillEditorProps> = ({ value, onChange, placeholder = 'Start writing...' }) => {
   const editorRef = useRef<HTMLDivElement>(null);
-  const quillRef = useRef<any>(null);
+  const quillRef = useRef<Quill | null>(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;

@@ -13,7 +13,7 @@ function LoginPage() {
       password: "",
     });
 
-    const handleLogin = async (e:any) =>{
+    const handleLogin = async (e:React.FormEvent) =>{
       e.preventDefault();
       console.log(user);
       setLoading(true);
@@ -24,8 +24,12 @@ function LoginPage() {
         alert("Login Successful");
         setLoading(false);
         router.push("/main");
-      } catch (error:any) {
-        console.log(error.message);
+      } catch (error:unknown) {
+        if (error instanceof Error) {
+          console.log(error.message);
+        } else {
+          console.log("An unknown error occurred");
+        }
         alert("Login Failed");
         setLoading(false);
       }
@@ -112,7 +116,7 @@ function LoginPage() {
           </form>
 
           <p className="mt-10 text-center text-base/6 text-gray-500">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             {/* <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
               Sign up now
             </a> */}

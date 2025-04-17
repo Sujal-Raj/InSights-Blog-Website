@@ -5,7 +5,7 @@ import Image from "next/image";
 import createGlobe from "cobe";
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { IconBrandYoutubeFilled } from "@tabler/icons-react";
+// import { IconBrandYoutubeFilled } from "@tabler/icons-react";
 import { IconMailFilled } from "@tabler/icons-react";
 import Link from "next/link";
 function FeaturesSection() {
@@ -51,7 +51,7 @@ function FeaturesSection() {
           <p className="text-sm lg:text-base  max-w-2xl  my-4 mx-auto text-neutral-500 text-center font-normal dark:text-neutral-300">
             From breaking news analysis to deep-dive features, Insights brings
             you thoughtful perspectives on the stories that matter most in
-            today's fast-moving world.
+            today&apos;s fast-moving world.
           </p>
         </div>
 

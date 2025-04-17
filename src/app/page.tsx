@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import { WavyBackground } from "@/app/components/ui/wavy-background";
-import Image from "next/image";
+// import { WavyBackground } from "@/app/components/ui/wavy-background";
+// import Image from "next/image";
 import Navbar from "./components/Navbar";
 import { MacbookScroll } from "@/app/components/ui/macbook-scroll";
-import Link from "next/link";
+// import Link from "next/link";
 import Footer from "./components/Footer";
 import FeaturesSection from "./components/FeaturesSection";
 import { AnimatedTestimonialsDemo } from "@/app/components/Testimonials";

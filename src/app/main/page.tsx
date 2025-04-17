@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import NavbarAfterLogin from "../components/NavbarAfterLogin";
 import Link from "next/link";
-import CreateBlogPage from "../create-a-blog/page";
-import MyBlogsPage from "../my-blogs/page";
+// import CreateBlogPage from "../create-a-blog/page";
+// import MyBlogsPage from "../my-blogs/page";
 import axios from "axios";
 import { Heart } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
@@ -25,7 +25,8 @@ function MainPage() {
   const [error, setError] = useState<string | null>(null);
   const [liked, setLiked] = useState(false);
   // const [likeCount, setLikeCount] = useState(blogs.likes || 0);
-  const username = localStorage.getItem("username");
+  // const username = localStorage.getItem("username");
+  localStorage.getItem("username");
 
   // console.log(username);
 
@@ -63,7 +64,12 @@ function MainPage() {
     try {
       const date = new Date(dateString);
       return formatDistanceToNow(date, { addSuffix: true });
-    } catch (e) {
+    } catch (e:unknown) {
+      if (e instanceof Error) {
+        console.error("Error formatting date:", e.message);
+      } else {
+        console.error("Error formatting date:", e);
+      }
       return "Recently";
     }
   };

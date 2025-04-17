@@ -1,6 +1,6 @@
 import connectToDatabase from "@/dbConfig/dbConfig";
 import user from "@/models/userModel";
-import bcryptjs, { hash } from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
 connectToDatabase();
@@ -37,7 +37,10 @@ export async function POST(request:NextRequest) {
         {status:201}
     )
 
-    } catch (error:any) {
-        return NextResponse.json({error:error.message},{status:500})
+    } catch (error:unknown) {
+        if (error instanceof Error) {
+            return NextResponse.json({error: error.message}, {status:500});
+        }
+        return NextResponse.json({error: "An unknown error occurred"}, {status:500});
     }
 }

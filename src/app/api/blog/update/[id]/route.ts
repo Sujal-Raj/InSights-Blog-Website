@@ -3,6 +3,13 @@ import connectToDatabase from "@/dbConfig/dbConfig";
 import Blog from "@/models/blogModel";
 import mongoose from "mongoose";
 
+interface BlogPost {
+    title: string | null;
+    content: string | null;
+    category: string | null;
+    imageUrl: string | null;
+}
+
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
     try {
         await connectToDatabase();
@@ -20,11 +27,11 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 
         // Parse FormData request body
         const formData = await req.formData();
-        const body: any = {
-            title: formData.get("title"),
-            content: formData.get("content"),
-            category: formData.get("category"),
-            imageUrl: formData.get("imageUrl") || formData.get("image") // Handle image upload
+        const body: BlogPost = {
+            title: formData.get("title") as string,
+            content: formData.get("content") as string,
+            category: formData.get("category") as string,
+            imageUrl: (formData.get("imageUrl") || formData.get("image")) as string,
         };
 
         // Update blog
@@ -35,8 +42,9 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
         }
 
         return NextResponse.json(updatedBlog);
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error updating blog:", error);
-        return NextResponse.json({ error: "Internal Server Error", details: error.message }, { status: 500 });
+        const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+        return NextResponse.json({ error: "Internal Server Error", details: errorMessage }, { status: 500 });
     }
 }
