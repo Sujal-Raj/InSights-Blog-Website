@@ -23,12 +23,12 @@ function MyBlogs() {
   // const username = localStorage.getItem("username");
   const [username, setUsername] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //   const storedUsername = localStorage.getItem("username");
-  //   if (storedUsername) {
-  //     setUsername(storedUsername);
-  //   }
-  // }, [])
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, [])
 
   // useEffect(() => {
   //   fetchMyBlogs();

@@ -20,7 +20,7 @@ function LoginPage() {
 
       try {
         const response = await axios.post("/api/users/login",user);
-        // localStorage.setItem("username",response.data.username);
+        localStorage.setItem("username",response.data.username);
         alert("Login Successful");
         setLoading(false);
         router.push("/main");
