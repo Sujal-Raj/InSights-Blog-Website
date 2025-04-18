@@ -9,7 +9,7 @@ import NavbarAfterLogin from "../components/NavbarAfterLogin";
 
 function CreateBlogPage() {
   // const [username, setUsername] = useState("");
-    // const [username, setUsername] = useState<string | null>(null);
+    const [username, setUsername] = useState<string | null>(null);
   
   // useEffect(() => {
   //   const name = localStorage.getItem("username");
@@ -25,14 +25,14 @@ function CreateBlogPage() {
   //     }
   //   }, []);
 
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     const storedUsername = localStorage.getItem("username");
-  //     if (storedUsername) {
-  //       setUsername(storedUsername);
-  //     }
-  //   }
-  // }, []);
+  useEffect(() => {
+    // if (typeof window !== "undefined") {
+      const storedUsername = localStorage.getItem("username");
+      if (storedUsername) {
+        setUsername(storedUsername);
+      }
+    // }
+  }, []);
   
 
   const [title, setTitle] = useState<string>("");
@@ -58,7 +58,7 @@ function CreateBlogPage() {
     }
 
     const formData = new FormData();
-    // formData.append("username", username || ""); // Attach username for author reference
+    formData.append("username", username || ""); // Attach username for author reference
     formData.append("title", title);
     formData.append("category", category);
     formData.append("content", content);
