@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
-import { writeFile } from "fs/promises";
-import path from "path";
 import Blog from "@/models/blogModel";
 import dbConnect from "@/dbConfig/dbConfig";
 
@@ -14,9 +12,9 @@ cloudinary.config({
 export async function POST(req: Request) {
   try {
     await dbConnect(); // Connect to MongoDB
+
     const formData = await req.formData();
-    // console.log(formData)
-    
+
     const username = formData.get('username');
     const title = formData.get("title") as string;
     const category = formData.get("category") as string;
@@ -27,32 +25,37 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "All fields are required" }, { status: 400 });
     }
 
-    // Convert File to Buffer
-    const bytes = await imageFile.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const arrayBuffer = await imageFile.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
-    // Save Image Locally (Optional)
-    const uploadPath = path.join(process.cwd(), "public/uploads", imageFile.name);
-    await writeFile(uploadPath, buffer);
+    // Upload buffer directly to Cloudinary
+    const uploadFromBuffer = () =>
+      new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          { folder: "blog-images" },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        );
+        stream.end(buffer);
+      });
 
-    // ✅ Upload Image to Cloudinary
-    const cloudinaryResponse = await cloudinary.uploader.upload(uploadPath, {
-      folder: "blog-images",
-    });
+    const cloudinaryResult = await uploadFromBuffer();
 
-    // Save Blog to MongoDB
+    // Save blog to MongoDB
     const newBlog = new Blog({
       username,
       title,
       category,
       content,
-      imageUrl: cloudinaryResponse.secure_url,
+      imageUrl: (cloudinaryResult as any).secure_url,
     });
 
     await newBlog.save();
 
     return NextResponse.json({ message: "Blog created successfully", blog: newBlog }, { status: 201 });
-  } catch (error: unknown) {
+  } catch (error) {
     console.error("Error creating blog:", error);
     return NextResponse.json({ error: "Failed to create blog" }, { status: 500 });
   }
