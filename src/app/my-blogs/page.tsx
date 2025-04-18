@@ -20,12 +20,27 @@ function MyBlogs() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const username = localStorage.getItem("username");
+  // const username = localStorage.getItem("username");
+  const [username, setUsername] = useState<string | null>(null);
+
+  // useEffect(() => {
+  //   const storedUsername = localStorage.getItem("username");
+  //   if (storedUsername) {
+  //     setUsername(storedUsername);
+  //   }
+  // }, [])
+
+  // useEffect(() => {
+  //   fetchMyBlogs();
+  // }, []);
+
 
   useEffect(() => {
-    fetchMyBlogs();
-  }, []);
-
+    if (username) {
+      fetchMyBlogs();
+    }
+  }, [username]);
+  
   const fetchMyBlogs = async () => {
     try {
       const response = await axios.get(`/api/blog/get/${username}`);
@@ -93,11 +108,12 @@ function MyBlogs() {
       <div className="min-h-[10vh]">
         <NavbarAfterLogin />
       </div>
+      
       <div className="container mx-auto px-4 py-8">
         {/* <h2 className="text-4xl font-semibold text-center mb-4">My Blogs</h2> */}
         <div className="flex items-center justify-center flex-col py-5 gap-2">
           <h2 className="text-4xl font-semibold">My Blogs</h2>
-          <p className="text-gray-400 underline">Catch your blogs here!</p>
+          <p className="text-gray-400 underline ">Catch your blogs here!</p>
         </div>
         {/* 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

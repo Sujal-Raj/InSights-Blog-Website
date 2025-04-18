@@ -1,4 +1,5 @@
 "use client"
+// export const dynamic = "force-dynamic"; 
 import React, { useEffect, useState } from "react";
 import QuillEditor from "../components/QuillEditor";
 import 'quill/dist/quill.snow.css';
@@ -7,13 +8,32 @@ import NavbarAfterLogin from "../components/NavbarAfterLogin";
 
 
 function CreateBlogPage() {
-  const [username, setUsername] = useState("");
-  useEffect(() => {
-    const name = localStorage.getItem("username");
-    if (name) {
-      setUsername(name);
-    }
-  }, []);
+  // const [username, setUsername] = useState("");
+    // const [username, setUsername] = useState<string | null>(null);
+  
+  // useEffect(() => {
+  //   const name = localStorage.getItem("username");
+  //   if (name) {
+  //     setUsername(name);
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //     const storedUsername = localStorage.getItem("username");
+  //     if (storedUsername) {
+  //       setUsername(storedUsername);
+  //     }
+  //   }, []);
+
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const storedUsername = localStorage.getItem("username");
+  //     if (storedUsername) {
+  //       setUsername(storedUsername);
+  //     }
+  //   }
+  // }, []);
+  
 
   const [title, setTitle] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -38,7 +58,7 @@ function CreateBlogPage() {
     }
 
     const formData = new FormData();
-    formData.append("username", username); // Attach username for author reference
+    // formData.append("username", username || ""); // Attach username for author reference
     formData.append("title", title);
     formData.append("category", category);
     formData.append("content", content);

@@ -5,12 +5,17 @@ import Blog from "@/models/blogModel";
 
 export async function GET(
   request: Request,
-  { params }: { params: { username: string } }
+  { params }: { params: Promise<{ id: string; username: string }> }
 ) {
   try {
+
+    const { id } = await params;  // Await the promise to access the object
+
     await dbConnect();
+
+
     
-    const username = params.username;
+    const username = (await params).username;
     const blogs = await Blog.find({ username })
       .sort({ createdAt: -1 }); // Most recent first
     

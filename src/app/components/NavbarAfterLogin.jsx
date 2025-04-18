@@ -19,7 +19,7 @@ import { useRouter } from 'next/navigation';
 function NavbarAfterLogin() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const username = localStorage.getItem("username");
+  // const username = localStorage.getItem("username");
 
     const links = [
         {
@@ -83,7 +83,7 @@ function NavbarAfterLogin() {
 
       const handleLogout = () => {
         setLoading(true);
-        localStorage.clear();
+        // localStorage.clear();
         router.push("/");
         // setActiveSession("");
         // Clear any cookies set by the app
@@ -106,7 +106,8 @@ function NavbarAfterLogin() {
     </nav> */}
     <nav className="min-h-[10vh] flex justify-between items-center px-10 fixed top-0 w-full z-10000 bg-[#0a0a0a]">
         <h1 className="text-2xl/7 font-bold text-white sm:truncate sm:text-3xl sm:tracking-tight capitalize">
-          Welcome,{username}
+          Welcome
+          {/* Welcome,{username} */}
         </h1>
         <div className="flex items-center gap-4">
           <ul className="flex items-center gap-4">

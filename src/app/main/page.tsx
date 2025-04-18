@@ -24,9 +24,17 @@ function MainPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [liked, setLiked] = useState(false);
+  const [username, setUsername] = useState<string | null>(null);
+  
   // const [likeCount, setLikeCount] = useState(blogs.likes || 0);
   // const username = localStorage.getItem("username");
-  localStorage.getItem("username");
+  // localStorage.getItem("username");
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   // console.log(username);
 

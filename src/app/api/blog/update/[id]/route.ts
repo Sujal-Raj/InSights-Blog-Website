@@ -10,12 +10,15 @@ interface BlogPost {
     imageUrl: string | null;
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request,
+    { params }: { params: Promise<{ id: string }> }
+    ) {
     try {
+        const { id } = await params; // Await the promise to access the object
         await connectToDatabase();
 
         // Validate ID
-        if (!mongoose.Types.ObjectId.isValid(params.id)) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
             return NextResponse.json({ error: "Invalid blog ID" }, { status: 400 });
         }
 
@@ -35,7 +38,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
         };
 
         // Update blog
-        const updatedBlog = await Blog.findByIdAndUpdate(params.id, body, { new: true });
+        const updatedBlog = await Blog.findByIdAndUpdate(id, body, { new: true });
 
         if (!updatedBlog) {
             return NextResponse.json({ error: "Blog not found" }, { status: 404 });
