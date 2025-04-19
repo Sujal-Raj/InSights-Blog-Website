@@ -45,9 +45,10 @@ Ensure you have the following installed:
    ```sh
    MONGO_URI=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret
-   CLOUD_NAME=
-   API_KEY=
-   API_SECRET=
+   CLOUD_NAME=Of Cloudinary
+   API_KEY=Of Cloudinary
+   API_SECRET=Of Cloudinary
+   GEMINI_API_KEY=
    ```
 
 4. **Run the Development Server:**
@@ -61,8 +62,7 @@ Ensure you have the following installed:
 ## Deployment
 To deploy the project:
 <!--
-- **Frontend:** Use Vercel or Netlify for easy deployment.
-- **Backend:** Deploy on Render, Heroku, or any cloud service supporting Node.js.
+- Use Vercel or Netlify for easy deployment.
 -->
 
 ## Contributing
