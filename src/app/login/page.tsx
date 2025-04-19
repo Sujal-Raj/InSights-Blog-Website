@@ -15,7 +15,7 @@ function LoginPage() {
 
     const handleLogin = async (e:React.FormEvent) =>{
       e.preventDefault();
-      console.log(user);
+      // console.log(user);
       setLoading(true);
 
       try {
@@ -34,14 +34,18 @@ function LoginPage() {
         setLoading(false);
       }
     }
+
+    const redirectToHomePage = () => {
+      router.push("/");
+    }
   return (
     <>
       <nav className="h-[10vh] flex justify-between items-center px-10">
-        <h1 className="text-2xl/7 font-bold text-black dark:text-white sm:truncate sm:text-3xl sm:tracking-tight">
+        <h1 onClick={redirectToHomePage} className="text-2xl/7 font-bold text-black dark:text-white sm:truncate sm:text-3xl sm:tracking-tight">
           InSights
         </h1>
       </nav>
-      <div className="flex h-[90vh] flex-1 flex-col  px-6 py-12 lg:px-8 bg-gray-50 dark:bg-black">
+      <div className="flex h-[90vh] flex-1 flex-col  px-6 py-12 lg:px-8 bg-gray-100 dark:bg-black">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           {/* <img
             alt="Your Company"

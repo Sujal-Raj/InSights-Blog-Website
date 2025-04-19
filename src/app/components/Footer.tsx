@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { FaTwitter, FaYoutube, FaInstagram, FaGithub } from "react-icons/fa";
+import { FaTwitter, FaYoutube, FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -29,7 +29,14 @@ function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-3">Project</h3>
             <ul className="space-y-2">
-              <li className="cursor-pointer hover:text-white transition">Contribute</li>
+              {/* <li className="cursor-pointer hover:text-white transition">Contribute</li> */}
+              <a
+          href="https://github.com/Sujal-Raj/InSights-Blog-Website"  // Replace with your Twitter URL
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Contribute
+        </a>
               <li className="cursor-pointer hover:text-white transition">Media assets</li>
               <li className="cursor-pointer hover:text-white transition">Changelog</li>
               <li className="cursor-pointer hover:text-white transition">Releases</li>
@@ -47,14 +54,52 @@ function Footer() {
         </div>
       </div>
       <div className="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
-        <p className="text-sm">© 2020 mantine.dev. All rights reserved.</p>
-        <div className="flex space-x-5 mt-4 md:mt-0">
+      {/* Footer Text */}
+      <p className="text-sm">© 2020 mantine.dev. All rights reserved.</p>
+
+      {/* Social Media Links */}
+      <div className="flex space-x-5 mt-4 md:mt-0">
+        {/* <a
+          href="https://twitter.com/yourprofile"  // Replace with your Twitter URL
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FaTwitter className="text-gray-400 hover:text-white cursor-pointer" size={22} />
+        </a> */}
+        
+        {/* <a
+          href="https://www.youtube.com/channel/yourchannel"  // Replace with your YouTube URL
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FaYoutube className="text-gray-400 hover:text-white cursor-pointer" size={22} />
+        </a> */}
+        
+        {/* <a
+          href="https://www.instagram.com/yourprofile"  // Replace with your Instagram URL
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FaInstagram className="text-gray-400 hover:text-white cursor-pointer" size={22} />
+        </a> */}
+        
+        <a
+          href="https://github.com/Sujal-Raj/"  // Replace with your GitHub URL
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FaGithub className="text-gray-400 hover:text-white cursor-pointer" size={22} />
-        </div>
+        </a>
+        
+        <a
+          href="https://www.linkedin.com/in/sujalraj1/"  // Replace with your LinkedIn URL
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaLinkedin className="text-gray-400 hover:text-white cursor-pointer" size={22} />
+        </a>
       </div>
+    </div>
     </footer>
     </>
   )
