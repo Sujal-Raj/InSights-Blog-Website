@@ -31,7 +31,7 @@ export default function Home() {
             //   This Macbook is built with Tailwindcss. <br /> No kidding.
             // </span>
             <>
-              <p className="text-3xl md:text-5xl lg:text-7xl text-white font-bold inter-var text-center mb-4">
+              <p className="text-3xl md:text-5xl lg:text-7xl dark:text-white text-black font-bold inter-var text-center mb-4">
             Explore.Learn.Transform
             </p>
             {/* <p className=" text-xl md:text-xl lg:text-2xl font-bold w-1/2 mx-auto text-center">

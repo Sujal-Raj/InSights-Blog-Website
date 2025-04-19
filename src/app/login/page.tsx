@@ -37,18 +37,18 @@ function LoginPage() {
   return (
     <>
       <nav className="h-[10vh] flex justify-between items-center px-10">
-        <h1 className="text-2xl/7 font-bold text-white sm:truncate sm:text-3xl sm:tracking-tight">
+        <h1 className="text-2xl/7 font-bold text-black dark:text-white sm:truncate sm:text-3xl sm:tracking-tight">
           InSights
         </h1>
       </nav>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="flex h-[90vh] flex-1 flex-col  px-6 py-12 lg:px-8 bg-gray-50 dark:bg-black">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           {/* <img
             alt="Your Company"
             src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
             className="mx-auto h-10 w-auto"
           /> */}
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">
+          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight dark:text-white">
             Login to your account
           </h2>
         </div>
